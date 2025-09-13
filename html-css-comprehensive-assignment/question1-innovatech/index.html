@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>InnovateTech Solutions</title>
+    <link rel="icon" href="images/favicon.ico" />
+    <style>
+    /* ==========================================================================
+       CSS Reset / Normalize
+    ========================================================================== */
+    *, *::before, *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        line-height: 1.6;
+        background: #f4f6f8;
+        color: #333;
+        transition: background 0.3s ease, color 0.3s ease;
+    }
+
+    a {
+        text-decoration: none;
+        color: #2196f3;
+        transition: color 0.3s ease;
+    }
+
+    a:hover {
+        color: #0b79d0;
+    }
+
+    img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    /* ==========================================================================
+       Layout Components
+    ========================================================================== */
+    .page-layout {
+        display: grid;
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+        grid-template-rows: auto 1fr auto;
+        min-height: 100vh;
+    }
+
+    header {
+        grid-area: header;
+        background: #222;
+        color: #fff;
+        padding: 1rem 2rem;
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+        box-shadow: 0 2px 6px rgba(0,0,0,0.3);
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+    }
+
+    nav ul {
+        list-style: none;
+        display: flex;
+        gap: 1rem;
+    }
+
+    nav ul li {
+        display: inline;
+    }
+
+    nav ul li a {
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+    }
+
+    nav ul li a:hover {
+        background: #444;
+    }
+
+    .cta {
+        background: #2196f3;
+        color: #fff;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+        transition: background 0.3s ease;
+    }
+
+    .cta:hover {
+        background: #0b79d0;
+    }
+
+    main {
+        grid-area: main;
+        padding: 2rem;
+        max-width: 1200px;
+        margin: auto;
+    }
+
+    footer {
+        grid-area: footer;
+        background: #222;
+        color: #fff;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    /* ==========================================================================
+       Hero Section
+    ========================================================================== */
+    .hero {
+        text-align: center;
+        padding: 2rem 1rem;
+        background: #fff;
+        border-radius: 8px;
+        animation: fadeIn 1s ease-in;
+    }
+
+    .hero h2 {
+        font-size: 2rem;
+        color: #2196f3;
+    }
+
+    .hero p {
+        font-size: 1.1rem;
+        color: #555;
+    }
+
+    .hero img {
+        max-height: 250px;
+        margin-top: 1rem;
+        transition: transform 0.3s ease;
+    }
+
+    .hero img:hover {
+        transform: scale(1.05);
+    }
+
+    .hero .buttons a {
+        display: inline-block;
+        margin: 0.5rem;
+    }
+
+    /* ==========================================================================
+       Services Section
+    ========================================================================== */
+    .services {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        margin-top: 2rem;
+    }
+
+    .service-card {
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 1rem;
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        cursor: pointer;
+    }
+
+    .service-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+    }
+
+    /* ==========================================================================
+       About Preview Section
+    ========================================================================== */
+    .about-preview {
+        margin-top: 2rem;
+        animation: fadeIn 1s ease-in;
+    }
+
+    .about-preview h3 {
+        color: #2196f3;
+    }
+
+    .about-preview h4 {
+        color: #555;
+        margin-top: 1rem;
+    }
+
+    .stats dl {
+        display: flex;
+        gap: 2rem;
+        margin-top: 1rem;
+    }
+
+    .stats dt {
+        font-size: 1.5rem;
+        color: #2196f3;
+    }
+
+    .stats dd {
+        color: #555;
+    }
+
+    /* ==========================================================================
+       About Page
+    ========================================================================== */
+    .team {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        gap: 1rem;
+        margin-top: 1rem;
+    }
+
+    .team-member {
+        background: #fff;
+        border: 1px solid #ddd;
+        padding: 1rem;
+        text-align: center;
+        border-radius: 8px;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-member:hover {
+        transform: scale(1.05);
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .values ul {
+        list-style: none;
+        margin-top: 1rem;
+    }
+
+    .values li {
+        background: #fff;
+        border-left: 4px solid #2196f3;
+        margin-bottom: 0.5rem;
+        padding: 0.5rem 1rem;
+        border-radius: 4px;
+    }
+
+    /* ==========================================================================
+       Contact Page
+    ========================================================================== */
+    address {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 8px;
+    }
+
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 1rem;
+        background: #fff;
+        border-radius: 8px;
+        overflow: hidden;
+    }
+
+    th, td {
+        padding: 0.75rem;
+        border-bottom: 1px solid #ddd;
+    }
+
+    th {
+        background: #2196f3;
+        color: #fff;
+    }
+
+    form {
+        background: #fff;
+        padding: 1rem;
+        border-radius: 8px;
+        margin-top: 1rem;
+    }
+
+    fieldset {
+        margin-bottom: 1rem;
+        border: none;
+    }
+
+    legend {
+        font-weight: bold;
+        margin-bottom: 0.5rem;
+        color: #2196f3;
+    }
+
+    label {
+        margin-bottom: 0.2rem;
+        display: block;
+    }
+
+    input, select, textarea {
+        width: 100%;
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        transition: border-color 0.3s ease;
+    }
+
+    input:focus, select:focus, textarea:focus {
+        border-color: #2196f3;
+        outline: none;
+    }
+
+    .form-buttons {
+        display: flex;
+        gap: 1rem;
+    }
+
+    button {
+        padding: 0.5rem 1rem;
+        border: none;
+        border-radius: 4px;
+        background: #2196f3;
+        color: #fff;
+        cursor: pointer;
+        transition: background 0.3s ease;
+    }
+
+    button:hover {
+        background: #0b79d0;
+    }
+
+    /* ==========================================================================
+       Footer
+    ========================================================================== */
+    footer a {
+        margin: 0 0.5rem;
+    }
+
+    /* ==========================================================================
+       Responsive Design
+    ========================================================================== */
+    @media (max-width: 768px) {
+        nav ul {
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+    }
+
+    @media (max-width: 480px) {
+        .hero h2 {
+            font-size: 1.5rem;
+        }
+
+        .services {
+            grid-template-columns: 1fr;
+        }
+
+        .team {
+            grid-template-columns: 1fr;
+        }
+    }
+
+    /* ==========================================================================
+       Page Navigation
+    ========================================================================== */
+    .page {
+        display: none;
+    }
+
+    .page.active {
+        display: block;
+    }
+
+    /* ==========================================================================
+       Animations
+    ========================================================================== */
+    @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(20px); }
+        to { opacity: 1; transform: translateY(0); }
+    }
+    </style>
+</head>
+<body>
+    <div class="page-layout">
+        <header>
+            <nav>
+                <div class="logo">
+                    <h1>InnovateTech Solutions</h1>
+                </div>
+                <ul>
+                    <li><a href="#" onclick="showPage('home')">Home</a></li>
+                    <li><a href="#" onclick="showPage('about')">About</a></li>
+                    <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                </ul>
+                <a href="#" class="cta">Get Started</a>
+            </nav>
+        </header>
+
+        <main>
+            <!-- Home Page -->
+            <div id="home" class="page active">
+                <section class="hero">
+                    <h2>Empowering Innovation</h2>
+                    <p>Your technology partner for modern solutions.</p>
+                    <img src="images/hero-image.jpg" alt="Team working together">
+                    <div class="buttons">
+                        <a href="#" class="cta">Learn More</a>
+                        <a href="#" class="cta">Contact Us</a>
+                    </div>
+                </section>
+
+                <section class="services">
+                    <div class="service-card">
+                        <h3>Web Development</h3>
+                        <p>Building responsive and scalable websites.</p>
+                        <a href="#">Learn More</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Mobile Apps</h3>
+                        <p>Creating apps that users love.</p>
+                        <a href="#">Learn More</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Cloud Solutions</h3>
+                        <p>Secure and efficient cloud services.</p>
+                        <a href="#">Learn More</a>
+                    </div>
+                    <div class="service-card">
+                        <h3>Consulting</h3>
+                        <p>Expert guidance for your tech projects.</p>
+                        <a href="#">Learn More</a>
+                    </div>
+                </section>
+
+                <section class="about-preview">
+                    <h3>About Us</h3>
+                    <p>InnovateTech Solutions is dedicated to delivering cutting-edge technology solutions tailored to meet the unique demands of today's businesses. With years of experience and a team of experts, we are committed to helping our clients navigate the digital landscape.</p>
+                    <p>We value innovation, integrity, and excellence, and strive to bring unparalleled service to our customers.</p>
+
+                    <div>
+                        <h4>Our Mission</h4>
+                        <p>To empower businesses with technology-driven strategies that foster growth and success.</p>
+                    </div>
+                    <div>
+                        <h4>Our Vision</h4>
+                        <p>To be a global leader in providing innovative and sustainable technology solutions.</p>
+                    </div>
+
+                    <div class="stats">
+                        <dl>
+                            <div>
+                                <dt>10+</dt>
+                                <dd>Years of Experience</dd>
+                            </div>
+                            <div>
+                                <dt>500+</dt>
+                                <dd>Projects Delivered</dd>
+                            </div>
+                            <div>
+                                <dt>300+</dt>
+                                <dd>Happy Clients</dd>
+                            </div>
+                        </dl>
+                    </div>
+                </section>
+            </div>
+
+            <!-- About Page -->
+            <div id="about" class="page">
+                <section>
+                    <h2>Our History</h2>
+                    <ol>
+                        <li><strong>2010:</strong> Founded with a vision to innovate.</li>
+                        <li><strong>2015:</strong> Expanded into mobile development.</li>
+                        <li><strong>2020:</strong> Became a cloud solutions provider.</li>
+                        <li><strong>2023:</strong> Serving clients globally.</li>
+                    </ol>
+                </section>
+
+                <section>
+                    <h2>Our Team</h2>
+                    <div class="team">
+                        <div class="team-member">
+                            <img src="images/team-photos/member1.jpg" alt="Team member John Doe">
+                            <h4>John Doe</h4>
+                            <p>CEO</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="images/team-photos/member2.jpg" alt="Team member Jane Smith">
+                            <h4>Jane Smith</h4>
+                            <p>CTO</p>
+                        </div>
+                        <div class="team-member">
+                            <img src="images/team-photos/member3.jpg" alt="Team member Alex Johnson">
+                            <h4>Alex Johnson</h4>
+                            <p>Lead Developer</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="values">
+                    <h2>Our Values</h2>
+                    <ul>
+                        <li><strong>Innovation:</strong> Continuously exploring new technologies.</li>
+                        <li><strong>Integrity:</strong> Transparent and honest dealings.</li>
+                        <li><strong>Collaboration:</strong> Working together to achieve goals.</li>
+                        <li><strong>Customer Success:</strong> Putting clients at the center of everything.</li>
+                    </ul>
+                </section>
+            </div>
+
+            <!-- Contact Page -->
+            <div id="contact" class="page">
+                <section>
+                    <h2>Contact Information</h2>
+                    <address>
+                        123 Tech Avenue,<br>
+                        Innovation City, TX 12345<br>
+                        <a href="tel:+1234567890">+1 (234) 567-890</a><br>
+                        <a href="mailto:info@innovatetech.com">info@innovatetech.com</a>
+                    </address>
+
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Day</th>
+                                <th>Office Hours</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr><td>Monday - Friday</td><td>9 AM – 6 PM</td></tr>
+                            <tr><td>Saturday</td><td>10 AM – 4 PM</td></tr>
+                            <tr><td>Sunday</td><td>Closed</td></tr>
+                        </tbody>
+                    </table>
+                </section>
+
+                <section>
+                    <h2>Contact Form</h2>
+                    <form>
+                        <fieldset>
+                            <legend>Personal Information</legend>
+                            <label for="fullname">Full Name</label>
+                            <input type="text" id="fullname" name="fullname" required>
+
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" required>
+
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+
+                            <label for="company">Company/Organization</label>
+                            <input type="text" id="company" name="company">
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Inquiry Details</legend>
+                            <label for="service">Service Interest</label>
+                            <select id="service" name="service">
+                                <option>Web Development</option>
+                                <option>Mobile Apps</option>
+                                <option>Consulting</option>
+                                <option>Other</option>
+                            </select>
+
+                            <label>Project Timeline</label>
+                            <input type="radio" name="timeline" value="asap"> ASAP
+                            <input type="radio" name="timeline" value="1-3"> 1-3 months
+                            <input type="radio" name="timeline" value="3-6"> 3-6 months
+                            <input type="radio" name="timeline" value="6+"> 6+ months
+
+                            <label for="budget">Budget Range</label>
+                            <input type="range" id="budget" name="budget" min="0" max="100000" step="1000">
+
+                            <label>Project Type</label>
+                            <input type="checkbox" name="type" value="new"> New Website
+                            <input type="checkbox" name="type" value="redesign"> Redesign
+                            <input type="checkbox" name="type" value="mobile"> Mobile App
+                            <input type="checkbox" name="type" value="ecommerce"> E-commerce
+                            <input type="checkbox" name="type" value="other"> Other
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Message</legend>
+                            <label for="description">Project Description</label>
+                            <textarea id="description" name="description" rows="4" required></textarea>
+
+                            <label for="file">Upload Requirements</label>
+                            <input type="file" id="file" name="file" accept=".doc,.pdf,.txt">
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Preferences</legend>
+                            <label>Preferred Contact Method</label>
+                            <input type="radio" name="contact-method" value="email"> Email
+                            <input type="radio" name="contact-method" value="phone"> Phone
+                            <input type="radio" name="contact-method" value="video"> Video Call
+                        </fieldset>
+
+                        <fieldset>
+                            <legend>Terms</legend>
+                            <input type="checkbox" name="terms" required> I agree to the Terms of Service and Privacy Policy
+                            <br>
+                            <input type="checkbox" name="newsletter"> Subscribe to our newsletter
+                        </fieldset>
+
+                        <div class="form-buttons">
+                            <button type="submit">Submit</button>
+                            <button type="reset">Reset</button>
+                        </div>
+                    </form>
+                </section>
+            </div>
+        </main>
+
+        <footer>
+            <p>&copy; 2025 InnovateTech Solutions. All rights reserved.</p>
+            <p>
+                <a href="#">Facebook</a> |
+                <a href="#">Twitter</a> |
+                <a href="#">LinkedIn</a>
+            </p>
+        </footer>
+    </div>
+
+    <script>
+        function showPage(pageId) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById(pageId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
